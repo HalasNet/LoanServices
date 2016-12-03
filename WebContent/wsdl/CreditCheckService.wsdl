@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.upsay.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.upsay.fr" xmlns:intf="http://services.upsay.fr" xmlns:tns1="http://types.upsay.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.upsay.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://types.upsay.fr"/>
+   <element name="ckeck">
+    <complexType>
+     <sequence>
+      <element name="information" type="tns1:BorrowerInformation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ckeckResponse">
+    <complexType>
+     <sequence>
+      <element name="ckeckReturn" type="tns1:CreditCheckStatus"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://types.upsay.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Address">
+    <sequence>
+     <element name="addr1" nillable="true" type="xsd:string"/>
+     <element name="cityState" nillable="true" type="xsd:string"/>
+     <element name="telephone" nillable="true" type="xsd:string"/>
+     <element name="zip" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="BorrowerInformation">
+    <sequence>
+     <element name="SSN" nillable="true" type="xsd:string"/>
+     <element name="address" nillable="true" type="tns1:Address"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="CreditCheckStatus">
+    <sequence>
+     <element name="SSN" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="ckeckRequest">
+
+      <wsdl:part element="impl:ckeck" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ckeckResponse">
+
+      <wsdl:part element="impl:ckeckResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CreditCheckService">
+
+      <wsdl:operation name="ckeck">
+
+         <wsdl:input message="impl:ckeckRequest" name="ckeckRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:ckeckResponse" name="ckeckResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CreditCheckServiceSoapBinding" type="impl:CreditCheckService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="ckeck">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="ckeckRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="ckeckResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CreditCheckServiceService">
+
+      <wsdl:port binding="impl:CreditCheckServiceSoapBinding" name="CreditCheckService">
+
+         <wsdlsoap:address location="http://localhost:8080/LoanServices/services/CreditCheckService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
